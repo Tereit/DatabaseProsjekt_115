@@ -1,13 +1,5 @@
 create schema treningsdagbok;
 
-CREATE table treningsdagbok.periode
-	(FraDato DATE NOT NULL,
-    TilDato DATE NOT NULL,
-    Navn VARCHAR(20),
-    Resultat TEXT,
-    Mål TEXT,
-    PRIMARY KEY(FraDato, TilDato));
-
 create table treningsdagbok.treningsøkt
 	(Navn VARCHAR(20) NOT NULL, 
     Dato DATE NOT NULL, 
@@ -15,44 +7,68 @@ create table treningsdagbok.treningsøkt
     Varighet INT, 
     Form INT, 
     Notat VARCHAR(140),
+    Mal BOOLEAN,
     PRIMARY KEY(Navn, Dato));
 
 create table treningsdagbok.aktivitet
 	(Navn VARCHAR(20) NOT NULL, 
     Beskrivelse VARCHAR(140),
+    
     PRIMARY KEY(Navn));
+    
+create table treningsdagbok.utendørs
+	(Navn VARCHAR(20) NOT NULL,
+    Temperatur INT,
+    Vind Double,
+    Værtype VARCHAR(50),
+    ID INT NOT NULL,
+    PRIMARY KEY(ID),
+    FOREIGN KEY(Navn) REFERENCES aktivitet(Navn) ON DELETE CASCADE ON UPDATE CASCADE);
+    
+create table treningsdagbok.innendørs
+	(Navn VARCHAR(20) NOT NULL,
+    Luft VARCHAR(50),
+    Tilskuere INT,
+    ID INT NOT NULL,
+    PRIMARY KEY(ID),
+    FOREIGN KEY(Navn) REFERENCES aktivitet(Navn) ON DELETE CASCADE ON UPDATE CASCADE);
 
 create table treningsdagbok.øvelse
 	(Navn VARCHAR(20) NOT NULL, 
     Beskrivelse VARCHAR(140),
-    Lengdeitid INT,
-    Lengdeidist INT,
+    Typen ENUM('Kondis', 'Styrke'),
     PRIMARY KEY(Navn));
 
 CREATE table treningsdagbok.lignende
 	(Navn VARCHAR(20) NOT NULL,
     Alternativ VARCHAR(20) NOT NULL,
     PRIMARY KEY(Navn, Alternativ),
-    FOREIGN KEY(Navn) REFERENCES øvelse(Navn),
-    FOREIGN KEY(Alternativ) REFERENCES øvelse(Navn));
+    FOREIGN KEY(Navn) REFERENCES øvelse(Navn) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY(Alternativ) REFERENCES øvelse(Navn)ON DELETE CASCADE ON UPDATE CASCADE);
     
 CREATE table treningsdagbok.kombinasjon
 	(Navn VARCHAR(20) NOT NULL,
     NavnØvelse2 VARCHAR(20) NOT NULL,
     KombNavn VARCHAR(20) NOT NULL,
     PRIMARY KEY(Navn, NavnØvelse2),
-    FOREIGN KEY(Navn) REFERENCES øvelse(Navn),
-    FOREIGN KEY(NavnØvelse2) REFERENCES øvelse(Navn));
+    FOREIGN KEY(Navn) REFERENCES øvelse(Navn) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY(NavnØvelse2) REFERENCES øvelse(Navn) ON DELETE CASCADE ON UPDATE CASCADE);
     
-CREATE table treningsdagbok.belastning
+CREATE table treningsdagbok.målresult
 	(ID INT NOT NULL,
     Typen ENUM('Mål', 'Resultat'),
     Belastning DOUBLE, 
     Repetisjoner INT, 
     Sett INT,
+    LengdeiTid INT,
+    LengdeiDist INT,
     Navn VARCHAR(20) NOT NULL,
+    Øktnavn VARCHAR(20) NOT NULL,
+    Dato DATE NOT NULL,
     PRIMARY KEY(ID),
-    FOREIGN KEY(Navn) REFERENCES øvelse(Navn));
+    FOREIGN KEY(Navn) REFERENCES øvelse(Navn) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY(Øktnavn) REFERENCES treningsøkt(Navn) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY(Dato) REFERENCES treningsøkt(Dato) ON DELETE CASCADE ON UPDATE CASCADE);
 
 CREATE table treningsdagbok.PulsGPS
 	(Tid TIME NOT NULL,
@@ -60,9 +76,11 @@ CREATE table treningsdagbok.PulsGPS
     Lengdegrad VARCHAR(20),
     Breddegrad VARCHAR(20),
     MOH INT,
+    Dato DATE NOT NULL,
     Navn VARCHAR(20) NOT NULL,
-    PRIMARY KEY(Tid, Navn),
-    FOREIGN KEY(Navn) REFERENCES øvelse(Navn));
+    PRIMARY KEY(Tid, Navn, Dato),
+    FOREIGN KEY(Navn) REFERENCES treningsøkt(Navn) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY(Dato) REFERENCES treningsøkt(Dato) ON DELETE CASCADE ON UPDATE CASCADE);
     
 
 CREATE table treningsdagbok.gruppe
@@ -73,5 +91,12 @@ CREATE table treningsdagbok.tilhørerGruppe
 	(NavnØvelse VARCHAR(20) NOT NULL,
     NavnGruppe VARCHAR(20) NOT NULL,
     PRIMARY KEY(NavnØvelse, NavnGruppe),
-    FOREIGN KEY(NavnØvelse) REFERENCES øvelse(Navn),
-    FOREIGN KEY(NavnGruppe) REFERENCES gruppe(Navn));
+    FOREIGN KEY(NavnØvelse) REFERENCES øvelse(Navn) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY(NavnGruppe) REFERENCES gruppe(Navn) ON DELETE CASCADE ON UPDATE CASCADE);
+
+CREATE table treningsdagbok.delgruppe
+	(Delgruppe1 VARCHAR(20) NOT NULL,
+    Delgruppe2 VARCHAR(20) NOT NULL,
+    PRIMARY KEY(Delgruppe1, Delgruppe2),
+    FOREIGN KEY(Delgruppe1) REFERENCES gruppe(Navn) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY(Delgruppe2) REFERENCES gruppe(Navn) ON DELETE CASCADE ON UPDATE CASCADE);

@@ -113,4 +113,3 @@ CREATE TABLE treningsdagbok.inneholderØvelse
 	FOREIGN KEY(NavnØvelse) REFERENCES treningsdagbok.øvelse(Navn) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY(NavnØkt) REFERENCES treningsdagbok.treningsøkt(Navn) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY(DatoØkt) REFERENCES treningsdagbok.treningsøkt(Dato) ON DELETE CASCADE ON UPDATE CASCADE);
-    

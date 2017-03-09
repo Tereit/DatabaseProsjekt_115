@@ -1,4 +1,7 @@
 CREATE SCHEMA treningsdagbok;
+CREATE USER 'user'@'localhost' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON treningsdagbok.* TO 'user'@'localhost';
+FLUSH PRIVILEGES;
 
 CREATE TABLE treningsdagbok.aktivitet
 	(Navn VARCHAR(20) NOT NULL, 

@@ -15,7 +15,7 @@ public class MainApp extends Application {
 	public void start(Stage stage) throws Exception {
 	    
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(MainApp.class.getResource("../application.view/Root.fxml"));
+		loader.setLocation(MainApp.class.getResource("application.view/Root.fxml"));
 		AnchorPane root = (AnchorPane) loader.load();
 
 		Scene scene = new Scene(root);

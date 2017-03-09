@@ -4,26 +4,49 @@ import java.sql.*;
 
 public class Database {
 	static final String DRIVER = "com.mysql.jdbc.Driver";
-	static final String URL = "jdbc:mysql://localhost/treningsdagbok";
-
-	static final String USER = "user";
-	static final String PASS = "password";
+	private String url;
+	private String user;
+	private String pass;
+	private Connection conn = null;
+	private Statement stmt = null;
 	
-	public static void main(String[] args) {
-		Connection con = null;
-		Statement stmt = null;
+	public Database(String url, String user, String pass) {
+		this.url = url;
+		this.user = user;
+		this.pass = pass;
+	}
+	
+	public boolean connect() {
 		try {
 			Class.forName(DRIVER);
-			System.out.println("Connecting to database");
-			con = DriverManager.getConnection(URL, USER, PASS);
-			stmt = con.createStatement();
-			System.out.println("Success??");
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+			conn = DriverManager.getConnection(url, user, pass);
+		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return false;
 		}
+		createStatement();
+		return true;
+	}
+	
+	public boolean isConnected() {
+		if(conn != null) {
+			return true;
+		}
+		return false;
+	}
+	
+	private void createStatement() {
+		if(isConnected()) {
+			try {
+				this.stmt = conn.createStatement();
+			} catch (SQLException e) {
+				// TODO: change this to something useful
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public Statement getStatement() {
+		return stmt;
 	}
 }

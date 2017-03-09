@@ -1,6 +1,5 @@
 package application;
 
-import application.view.RootController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -9,18 +8,22 @@ import javafx.stage.Stage;
 
 public class MainApp extends Application {
 
-	static RootController rootController;
 	
 	@Override
-	public void start(Stage stage) throws Exception {
-	    
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(MainApp.class.getResource("application.view/Root.fxml"));
-		AnchorPane root = (AnchorPane) loader.load();
+	public void start(Stage stage) {
+		try {
+			
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("view/RootPane.fxml"));
+			AnchorPane root = loader.load();
+			
+			Scene scene = new Scene(root);
+			stage.setScene(scene);
+			stage.show();	
+		}
 
-		Scene scene = new Scene(root);
-		stage.setScene(scene);
-		stage.show();
+		catch(Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 	

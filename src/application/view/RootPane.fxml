@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
-	<!-- TODO Add Nodes -->
+<AnchorPane prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.RootController">
+   <children>
+      <TextField fx:id="search" layoutX="107.0" layoutY="75.0" />
+      <Label fx:id="output" layoutX="46.0" layoutY="192.0" />
+      <Label layoutX="46.0" layoutY="80.0" text="Input:" />
+   </children>
 </AnchorPane>
-

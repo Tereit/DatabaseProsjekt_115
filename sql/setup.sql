@@ -20,20 +20,26 @@ CREATE TABLE treningsdagbok.treningsøkt
     
 CREATE TABLE treningsdagbok.utendørs
 	(Navn VARCHAR(20) NOT NULL,
+    Dato DATE NOT NULL,
     Temperatur INT,
     Vind Double,
     Værtype VARCHAR(50),
     ID INT NOT NULL,
     PRIMARY KEY(ID),
-    FOREIGN KEY(Navn) REFERENCES treningsdagbok.aktivitet(Navn) ON DELETE CASCADE ON UPDATE CASCADE);
+    FOREIGN KEY(Navn) REFERENCES treningsdagbok.treningsøkt(Navn) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY(Dato) REFERENCES treningsdagbok.treningsøkt(Dato) ON DELETE CASCADE ON UPDATE CASCADE);
+
     
 CREATE TABLE treningsdagbok.innendørs
 	(Navn VARCHAR(20) NOT NULL,
+    Dato DATE NOT NULL,
     Luft VARCHAR(50),
     Tilskuere INT,
     ID INT NOT NULL,
     PRIMARY KEY(ID),
-    FOREIGN KEY(Navn) REFERENCES treningsdagbok.aktivitet(Navn) ON DELETE CASCADE ON UPDATE CASCADE);
+    FOREIGN KEY(Navn) REFERENCES treningsdagbok.treningsøkt(Navn) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY(Dato) REFERENCES treningsdagbok.treningsøkt(Dato) ON DELETE CASCADE ON UPDATE CASCADE);
+
 
 CREATE TABLE treningsdagbok.øvelse
 	(Navn VARCHAR(20) NOT NULL, 
@@ -56,9 +62,8 @@ CREATE TABLE treningsdagbok.kombinasjon
     FOREIGN KEY(Navn) REFERENCES treningsdagbok.øvelse(Navn) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY(NavnØvelse2) REFERENCES treningsdagbok.øvelse(Navn) ON DELETE CASCADE ON UPDATE CASCADE);
     
-CREATE TABLE treningsdagbok.målresultat
+CREATE TABLE treningsdagbok.resultat
 	(ID INT NOT NULL,
-    Typen ENUM('Mål', 'Resultat'),
     Belastning DOUBLE, 
     Repetisjoner INT, 
     Sett INT,
@@ -71,6 +76,22 @@ CREATE TABLE treningsdagbok.målresultat
     FOREIGN KEY(Navn) REFERENCES treningsdagbok.øvelse(Navn) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY(Øktnavn) REFERENCES treningsdagbok.treningsøkt(Navn) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY(Dato) REFERENCES treningsdagbok.treningsøkt(Dato) ON DELETE CASCADE ON UPDATE CASCADE
+    );
+    
+    CREATE TABLE treningsdagbok.mål
+	(ID INT NOT NULL,
+    StartDato DATE,
+    INDEX(StartDato),
+    SluttDato DATE,
+    INDEX(SluttDato),
+    Belastning DOUBLE, 
+    Repetisjoner INT, 
+    Sett INT,
+    LengdeiTid INT,
+    LengdeiDist INT,
+    Navn VARCHAR(20) NOT NULL,
+    PRIMARY KEY(ID),
+    FOREIGN KEY(Navn) REFERENCES treningsdagbok.øvelse(Navn) ON DELETE CASCADE ON UPDATE CASCADE
     );
 
 CREATE TABLE treningsdagbok.PulsGPS

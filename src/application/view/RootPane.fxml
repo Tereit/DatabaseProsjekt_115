@@ -6,16 +6,17 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.RootController">
+<AnchorPane maxHeight="800.0" maxWidth="600.0" minHeight="800.0" minWidth="600.0" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.RootController">
    <children>
-      <TextField fx:id="search" layoutX="107.0" layoutY="75.0" />
-      <Label fx:id="output" layoutX="46.0" layoutY="192.0" />
-      <Label layoutX="46.0" layoutY="80.0" text="Input:" />
-      <Label layoutX="18.0" layoutY="17.0" text="Username:" />
-      <Label layoutX="20.0" layoutY="45.0" text="Password:" />
-      <TextField fx:id="username" layoutX="77.0" layoutY="13.0" />
-      <PasswordField fx:id="password" layoutX="77.0" layoutY="41.0" />
-      <Button layoutX="256.0" layoutY="22.0" mnemonicParsing="false" onAction="#handleConnect" text="Connect" />
-      <Button layoutX="275.0" layoutY="75.0" mnemonicParsing="false" onAction="#handleQuery" text="Submit" />
+      <TextField fx:id="search" layoutX="128.0" layoutY="277.0" />
+      <Label layoutX="34.0" layoutY="282.0" text="Input:" AnchorPane.leftAnchor="34.0" />
+      <Label layoutX="32.0" layoutY="59.0" text="Username:" />
+      <Label layoutX="34.0" layoutY="123.0" text="Password:" />
+      <TextField fx:id="username" layoutX="128.0" layoutY="54.0" />
+      <PasswordField fx:id="password" layoutX="128.0" layoutY="118.0" />
+      <Button layoutX="327.0" layoutY="118.0" mnemonicParsing="false" onAction="#handleConnect" text="Connect" />
+      <Button layoutX="331.0" layoutY="277.0" mnemonicParsing="false" onAction="#handleQuery" text="Submit" />
+      <Button layoutX="427.0" layoutY="118.0" mnemonicParsing="false" text="Disconnect" />
+      <Label fx:id="output" layoutX="128.0" layoutY="358.0" />
    </children>
 </AnchorPane>

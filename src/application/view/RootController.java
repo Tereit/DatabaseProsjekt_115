@@ -1,5 +1,7 @@
 package application.view;
 
+import java.sql.SQLException;
+
 import application.MainApp;
 import application.model.Database;
 import javafx.fxml.FXML;
@@ -48,6 +50,16 @@ public class RootController {
 		
 		// TODO: make this show the result from the query
 		output.setText("Handeling your query, please wait...");
+	}
+	
+	@FXML
+	private void handleDisconnect() {
+		try {
+			this.database.disconnect();
+		} catch (SQLException e) {
+			this.mainApp.postAlert(AlertType.ERROR, "Error when attempting to disconnect", "Something went wrong when disconnecting from the database");
+			e.printStackTrace();
+		}
 	}
 	
 	public void setMainApp(MainApp mApp) {

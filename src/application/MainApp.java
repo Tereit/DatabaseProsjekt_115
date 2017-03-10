@@ -1,6 +1,8 @@
 package application;
 
-import application.view.RootController;
+import java.io.IOException;
+
+import application.model.AppController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -15,21 +17,40 @@ public class MainApp extends Application {
 
 	//static final String USER = "user";
 	//static final String PASS = "password";
+	private AnchorPane root;
+	private AppController controller;
+	
+	public void changeView(String path) {
+		
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
+			AnchorPane pane = (AnchorPane) loader.load();
+			
+			controller = loader.getController();
+			controller.setMainApp(this);
+			
+			root.getChildren().clear();
+			root.getChildren().add(pane);
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	@Override
 	public void start(Stage stage) {
 		try {
 			
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("view/RootPane.fxml"));
-			AnchorPane root = loader.load();
-			
-			RootController controller = loader.getController();
-			controller.setMainApp(this);
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("view/Root.fxml"));
+			root = (AnchorPane) loader.load();
+
 			
 			Scene scene = new Scene(root);
 			stage.setScene(scene);
 			stage.show();	
 			stage.setResizable(false);
+			
+			changeView("view/LoginPane.fxml");
 		}
 
 		catch(Exception e) {

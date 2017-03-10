@@ -37,9 +37,6 @@ public class MainApp extends Application {
 		
 	}
 	
-	public static void main(String[] args) {
-		launch(MainApp.class, args);
-	}
 	
 	public void postAlert(AlertType type, String title, String content) {
 		Alert alert = new Alert(type);
@@ -47,5 +44,11 @@ public class MainApp extends Application {
 		alert.setContentText(content);
 		
 		alert.showAndWait();
+	}
+	
+	
+	
+	public static void main(String[] args) {
+		launch(MainApp.class, args);
 	}
 }

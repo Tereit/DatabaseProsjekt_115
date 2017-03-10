@@ -5,6 +5,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+
 import application.MainApp;
 import application.model.Database;
 import javafx.fxml.FXML;
@@ -96,6 +97,16 @@ public class RootController {
 		//output.setText(henterut);
 
 		
+	}
+	
+	@FXML
+	private void handleDisconnect() {
+		try {
+			this.database.disconnect();
+		} catch (SQLException e) {
+			this.mainApp.postAlert(AlertType.ERROR, "Error when attempting to disconnect", "Something went wrong when disconnecting from the database");
+			e.printStackTrace();
+		}
 	}
 	
 	public void setMainApp(MainApp mApp) {

@@ -3,15 +3,15 @@ package application.view;
 import java.sql.SQLException;
 
 import application.MainApp;
+import application.model.AppController;
 import application.model.Database;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
-public class RootController {
+public class LoginController implements AppController {
 	
 	private Database database;
 	private MainApp mainApp;	
@@ -61,8 +61,11 @@ public class RootController {
 			e.printStackTrace();
 		}
 	}
-	
-	public void setMainApp(MainApp mApp) {
-		this.mainApp = mApp;
+
+	@Override
+	public void setMainApp(MainApp mainApp) {
+		this.mainApp = mainApp;
 	}
+	
+
 }

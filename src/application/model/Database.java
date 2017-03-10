@@ -35,6 +35,15 @@ public class Database {
 		return false;
 	}
 	
+	public void disconnect() throws SQLException {
+		try {
+			conn.close();
+			conn = null;
+		} catch(SQLException e) {
+			throw new SQLException(e);
+		}
+	}
+	
 	private void createStatement() {
 		if(isConnected()) {
 			try {

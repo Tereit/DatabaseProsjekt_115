@@ -3,6 +3,7 @@ package application;
 import java.io.IOException;
 
 import application.model.AppController;
+import application.model.Database;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -12,6 +13,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class MainApp extends Application {
+	
+	private Database database;
 
 	public static final String URL = "jdbc:mysql://localhost/treningsdagbok";
 
@@ -59,6 +62,13 @@ public class MainApp extends Application {
 		
 	}
 	
+	public void setDatabase(Database database) {
+		this.database = database;
+	}
+	
+	public Database getDatabase() {
+		return database;
+	}
 	
 	public void postAlert(AlertType type, String title, String content) {
 		Alert alert = new Alert(type);

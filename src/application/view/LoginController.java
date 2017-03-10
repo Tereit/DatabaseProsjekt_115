@@ -44,6 +44,7 @@ public class LoginController implements AppController {
 			return;
 		}
 		output.setText("Connection established");
+		mainApp.setDatabase(database);
 		mainApp.changeView("view/App.fxml");
 	}
 	
@@ -100,15 +101,7 @@ public class LoginController implements AppController {
 		
 	}
 	
-	@FXML
-	private void handleDisconnect() {
-		try {
-			this.database.disconnect();
-		} catch (SQLException e) {
-			this.mainApp.postAlert(AlertType.ERROR, "Error when attempting to disconnect", "Something went wrong when disconnecting from the database");
-			e.printStackTrace();
-		}
-	}
+
 
 	@Override
 	public void setMainApp(MainApp mainApp) {

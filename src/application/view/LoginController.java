@@ -43,7 +43,8 @@ public class LoginController implements AppController {
 			this.mainApp.postAlert(AlertType.ERROR, "Can't connect", "Could not connect to the database.\nPlease make sure the server is running, and that the login info is correct");
 			return;
 		}
-		output.setText("Connection established...");
+		output.setText("Connection established");
+		mainApp.changeView("view/App.fxml");
 	}
 	
 	@FXML
@@ -67,7 +68,7 @@ public class LoginController implements AppController {
 			e.printStackTrace();
 		}
 		System.out.println(quary);
-		output.setText("Handeling your query, please wait...");
+		output.setText("Handling your query, please wait...");
 
 		
 	}
@@ -89,7 +90,7 @@ public class LoginController implements AppController {
 				output.setText(henteUt);
 			}
 		} catch (SQLException e) {
-			this.mainApp.postAlert(AlertType.ERROR, "Statement failed","Statement failed");			e.printStackTrace();
+			this.mainApp.postAlert(AlertType.ERROR, "Statement failed","Statement failed");	
 			e.printStackTrace();
 		}
 		//System.out.println(quary);

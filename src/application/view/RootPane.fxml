@@ -16,7 +16,7 @@
       <PasswordField fx:id="password" layoutX="128.0" layoutY="118.0" />
       <Button layoutX="327.0" layoutY="118.0" mnemonicParsing="false" onAction="#handleConnect" text="Connect" />
       <Button layoutX="331.0" layoutY="277.0" mnemonicParsing="false" onAction="#handleQuery" text="Submit" />
-      <Button layoutX="427.0" layoutY="118.0" mnemonicParsing="false" text="Disconnect" />
+      <Button layoutX="427.0" layoutY="118.0" mnemonicParsing="false" onAction="#handleDisconnect" text="Disconnect" />
       <Label fx:id="output" layoutX="128.0" layoutY="358.0" />
    </children>
 </AnchorPane>

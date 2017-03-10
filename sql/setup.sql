@@ -129,12 +129,3 @@ CREATE TABLE treningsdagbok.delgruppe
     FOREIGN KEY(Delgruppe1) REFERENCES treningsdagbok.gruppe(Navn) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY(Delgruppe2) REFERENCES treningsdagbok.gruppe(Navn) ON DELETE CASCADE ON UPDATE CASCADE);
     
-CREATE TABLE treningsdagbok.inneholderØvelse
-	(NavnØvelse VARCHAR(20) NOT NULL,
-    NavnØkt VARCHAR(20) NOT NULL,
-    DatoØkt DATE NOT NULL,
-    PRIMARY KEY(NavnØvelse, NavnØkt, DatoØkt),
-	FOREIGN KEY(NavnØvelse) REFERENCES treningsdagbok.øvelse(Navn) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY(NavnØkt) REFERENCES treningsdagbok.treningsøkt(Navn) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY(DatoØkt) REFERENCES treningsdagbok.treningsøkt(Dato) ON DELETE CASCADE ON UPDATE CASCADE);
-    

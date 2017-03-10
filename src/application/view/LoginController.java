@@ -1,6 +1,10 @@
 package application.view;
 
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Statement;
+
 
 import application.MainApp;
 import application.model.AppController;
@@ -44,12 +48,55 @@ public class LoginController implements AppController {
 	
 	@FXML
 	private void handleQuery() {
-		String query = search.getText();
-		// TODO: make this pass an actual query to the database
-		System.out.println(query);
+	
+			String query = search.getText();
+			if (query.startsWith("insert")){
+				handleInsert(query);
+			} if (query.startsWith("select")){
+				handleSelect(query);
+			}
 		
-		// TODO: make this show the result from the query
+	}
+	
+	private void handleInsert(String quary){
+		Statement stmt = database.getStatement();
+		try {
+			stmt.executeUpdate(quary);
+		} catch (SQLException e) {
+			this.mainApp.postAlert(AlertType.ERROR, "Statement failed","Statement failed");			e.printStackTrace();
+			e.printStackTrace();
+		}
+		System.out.println(quary);
 		output.setText("Handeling your query, please wait...");
+
+		
+	}
+	private void handleSelect(String quary){
+		Statement stmt = database.getStatement();
+		try {
+			ResultSet rs = stmt.executeQuery(quary);
+			ResultSetMetaData rsmd = rs.getMetaData();
+			int antallKol = rsmd.getColumnCount();
+			System.out.println(antallKol);
+			while (rs.next()){
+				String henteUt = "";
+				for (int i = 1; i < antallKol+1; i++){
+					System.out.println(rs.getString(i));
+					henteUt += rs.getString(i) + " ";
+				}
+
+				System.out.println(henteUt);
+				output.setText(henteUt);
+			}
+		} catch (SQLException e) {
+			this.mainApp.postAlert(AlertType.ERROR, "Statement failed","Statement failed");			e.printStackTrace();
+			e.printStackTrace();
+		}
+		//System.out.println(quary);
+		//String henterut = "";
+		//output.setText(henterut);
+
+		
 	}
 	
 	@FXML

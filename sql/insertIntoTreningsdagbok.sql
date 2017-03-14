@@ -11,7 +11,6 @@ INSERT INTO øvelse (Navn, Beskrivelse, Typen) VALUES ('Jogging', 'Jogg-beskrive
 INSERT INTO kombinasjon (Navn, NavnØvelse2, KombNavn) VALUES ('Militærpress', 'Knebøy', 'Thrusters'); 
 INSERT INTO øvelse (Navn, Beskrivelse, Typen) VALUES ('Pushpress', 'press', 'Styrke');
 
-
 INSERT INTO tilhørerGruppe (NavnØvelse, NavnGruppe) VALUES ('Knebøy', 'Underkropp');
 INSERT INTO innendørs (Navn, Dato, Luft, Tilskuere, ID) VALUES ('Heidi', '2017-01-01', 'dårlig aircon', 10, 123);
 INSERT INTO utendørs (Navn, Dato, Temperatur, Vind, Værtype, ID) VALUES ('NBA-økt', '2017-02-02', 30, 3, 'sol', 124);

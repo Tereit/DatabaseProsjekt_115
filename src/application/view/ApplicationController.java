@@ -30,5 +30,13 @@ public class ApplicationController implements AppController {
 			e.printStackTrace();
 		}
 	}
+	@FXML
+	private void handleInsertion(){
+			mainApp.changeView("view/Insertion.fxml");
+	}
+	@FXML
+	private void handleSelect(){
+		mainApp.changeView("view/Select.fxml");
+	}
 
 }

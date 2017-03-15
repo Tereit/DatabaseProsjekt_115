@@ -35,7 +35,7 @@ public class SelectController implements AppController{
 	}
 	@FXML
 	private void initialize(){
-		box.getItems().addAll("aktiviteter", "Ã¸velser");
+		box.getItems().addAll("Aktiviteter", "Øvelser");
 	}
 	@FXML
 	private void handleChoice(){
@@ -49,7 +49,7 @@ public class SelectController implements AppController{
 		if (box.getValue() == "aktiviteter"){
 			SQL = "SELECT * from aktivitet";
 		}else{
-			SQL = "SELECT * FROM Ã¸velse";
+			SQL = "SELECT * FROM øvelse";
 		}
 		try {
 			rs = mainapp.getDatabase().getStatement().executeQuery(SQL);
@@ -80,7 +80,7 @@ public class SelectController implements AppController{
 			
 			
 		} catch (SQLException e) {
-			mainapp.postAlert(AlertType.ERROR, "Failed to select from aktiviteter", "kan ikke hente aktiviteter");
+			mainapp.postAlert(AlertType.ERROR, "Failed to select from aktiviteter", "Kan ikke hente aktiviteter");
 			e.printStackTrace();
 		}
 	}

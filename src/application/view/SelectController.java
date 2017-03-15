@@ -35,7 +35,7 @@ public class SelectController implements AppController{
 	}
 	@FXML
 	private void initialize(){
-		box.getItems().addAll("Aktiviteter", "Øvelser");
+		box.getItems().addAll("Aktiviteter", "Øvelser", "Treningsøkt");
 	}
 	@FXML
 	private void handleChoice(){
@@ -46,10 +46,12 @@ public class SelectController implements AppController{
 		
 		ResultSet rs;
 		String SQL;
-		if (box.getValue() == "aktiviteter"){
+		if (box.getValue() == "Aktiviteter"){
 			SQL = "SELECT * from aktivitet";
-		}else{
+		}else if(box.getValue() == "Øvelser"){
 			SQL = "SELECT * FROM øvelse";
+		}else {
+			SQL = "SELECT * FROM treningsøkt";
 		}
 		try {
 			rs = mainapp.getDatabase().getStatement().executeQuery(SQL);

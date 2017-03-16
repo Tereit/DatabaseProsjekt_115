@@ -10,7 +10,7 @@
          <bottom>
             <AnchorPane prefHeight="50.0" prefWidth="8000.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button layoutX="51.0" layoutY="-1.0" mnemonicParsing="false" onAction="#handleDisconnect" text="Disconnect" AnchorPane.leftAnchor="51.0" />
+                  <Button layoutX="26.0" layoutY="-1.0" mnemonicParsing="false" onAction="#handleDisconnect" text="Koble fra" AnchorPane.leftAnchor="26.0" />
                </children>
             </AnchorPane>
          </bottom>

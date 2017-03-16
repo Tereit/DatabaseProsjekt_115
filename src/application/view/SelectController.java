@@ -20,7 +20,7 @@ import javafx.util.Callback;
 public class SelectController implements AppController {
 	private MainApp mainapp;
 	@FXML
-	private ChoiceBox box;
+	private ChoiceBox<String> box;
 
 	@FXML
 	private TableView tw;

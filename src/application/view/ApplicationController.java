@@ -23,6 +23,7 @@ public class ApplicationController implements AppController {
 	@FXML
 	private void handleDisconnect() {
 		try {
+			this.database.getStatement().close();
 			this.database.disconnect();
 			mainApp.changeView("view/LoginPane.fxml");
 		} catch (SQLException e) {
